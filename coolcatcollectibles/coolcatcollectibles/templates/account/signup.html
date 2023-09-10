@@ -1,0 +1,26 @@
+{% extends 'global/page.html' %}
+{% load crispy_forms_tags %}
+{% block title %} Register{% endblock %}
+<!--INSERT CONTENT-->
+{% block body %}
+<h6 class="card-subtitle mb-2 text-muted">Sign-Up:</h6>
+<form class="register" style="width: 450px;" method="POST" action="">
+    {% csrf_token %}
+    {{user_form|crispy}}
+
+    <div class="col">
+        <button class="btn btn-primary pt-2" type="submit">
+            Sign Up
+        </button>
+    </div><br>
+    <div>
+        <p>By continuing, you agree to the CoolcatCollectibles <a href="/termsofuse">Terms of Use</a>
+            and <a href="/privacy">Privacy Notice</a>.
+        </p>
+    </div><br>
+    <div class="text-center">
+        <p>Already a member? <a href="/login">Log In</a></p>
+    </div>
+</form>
+
+{% endblock %}

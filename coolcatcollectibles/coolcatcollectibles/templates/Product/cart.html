@@ -1,0 +1,44 @@
+{% extends 'global/page.html' %}
+{% load static %}
+{% block pagestyle %}{% static 'styles/cart.css' %}{% endblock %}
+{% block title %} Job Tracker v0.2 {% endblock %}
+
+{% block body %}
+<div class="container cart">
+    {% for item in cart_items %}
+    <div class="card">
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-3 ">
+                <img class="product-image" src="{{item.product.picurl}}" alt="">
+            </div>
+            <div class="col-6 cart-item">
+                <p>{{item}}</p>
+                <p>{{ item.product.full_title}}</p> <!-- Replace with the actual field names in your Product model -->
+                <p>Quantity: {{ item.quantity }}</p>
+                <!-- Add other item details as needed -->
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-5"></div>
+        <div class="col-5"></div>
+        <div class="col-1">
+            <form action="post" method="post">
+                {% csrf_token %}
+                <button type="button" name="checkout" class="btn btn-primary  addCart">Checkout</button>
+            </form>
+        </div>
+        <div class="col-1">
+            <button type="button" name="checkout" class="btn btn-primary  addCart">Back</button>
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

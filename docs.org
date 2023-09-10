@@ -1,0 +1,26 @@
+* Thoughts 
+** Architecture 
+- User
+-- Track an Order
+-- Orders
+-- Profile
+-- Cart
+-- Coupons
+
+- Payment
+-- Shopify/Paypal
+
+- Store
+-- Product Page
+-- Product Listings View
+
+- Support
+-- Add support for JIRA
+
+- Information
+-- About
+-- Shipping
+-- FAQs
+-- Leave us Feedback
+-- Contact US
+

@@ -1,0 +1,546 @@
+
+*{
+	font-family:Times New Roman;
+
+}
+body{
+	background-color: #e3e3e3;
+	overflow: hidden;
+}
+
+.main-card{
+	max-width: 95%;
+	position: relative;
+	height: 80vh;
+	margin-left: auto;
+	margin-top: 3vh;
+	border-radius: 25px;
+	overflow:auto;
+
+	border: #9ed3ff 3px solid;
+	background-color: #bdbdbd;
+}
+
+.content-wrap{
+	padding-bottom: 5rem;
+
+}
+.page-container{
+
+	position:relative;
+	min-height: 100vh;
+}
+
+.navbar, .footer{
+	background-color: white;
+}
+
+.footer{
+	position: absolute;
+	bottom:0;
+	width: 100%;
+	height: 2rem;
+
+
+}
+.entry{
+	border-radius: 5px;
+	border: #8ac2ff 3px solid;
+}
+.entry:hover{
+	opacity:0.75;
+
+
+}
+.profile{
+	width: 100%;
+	position: relative;
+	margin-left: 15%;
+}
+
+.about{
+	margin-left: 5%;
+
+}
+
+.kanban{
+	overflow-y:scroll;
+	width:100%;
+	height:100%;
+
+}
+
+.resume{
+	width:100%;
+	height: 100%;
+
+}
+@media all and (min-width:960px) and (max-width: 1024px) {
+  /* put your css styles in here */
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+
+@media all and (min-width:801px) and (max-width: 959px) {
+  /* put your css styles in here */
+
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+
+@media all and (min-width:769px) and (max-width: 800px) {
+  /* put your css styles in here */
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+
+@media all and (min-width:569px) and (max-width: 768px) {
+  /* put your css styles in here */
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+
+@media all and (min-width:481px) and (max-width: 568px) {
+  /* put your css styles in here */
+
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+
+@media all and (min-width:321px) and (max-width: 480px) {
+  /* put your css styles in here */
+
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 90%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:auto;
+
+		border: #9ed3ff 3px solid;
+		background-color: #bdbdbd;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 2rem;
+	
+	
+	}
+	.profile{
+		width: 70%;
+		position: relative;
+		left: 35%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+	.resume{
+		width: 100%;
+		height: 100%;
+	
+	}
+}
+
+@media all and (min-width:0px) and (max-width: 320px) {
+  /* put your css styles in here */
+
+	*{
+		font-family:Times New Roman;
+	
+	}
+	body{
+		background-color: #e3e3e3;
+	}
+	
+	.main-card{
+		max-width: 50%;
+		position: relative;
+		background-color: #e3e3e3;
+		height: 80vh;
+		margin-left: auto;
+		margin-top: 5vh;
+		border: #bdbdbd 3px solid;
+		border-radius: 25px;
+		overflow:hidden;
+	}
+	
+	.content-wrap{
+		padding-bottom: 5rem;
+	
+	}
+	.page-container{
+	
+		position:relative;
+		min-height: 100vh;
+	}
+	
+	.navbar, .footer{
+		background-color: white;
+	}
+	
+	.footer{
+		position: absolute;
+		bottom:0;
+		width: 100%;
+		height: 5rem;
+	
+	
+	}
+
+	.profile{
+		width: 25%;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+
+	.about{
+		margin-left: 5%;
+	
+	}
+
+	.kanban{
+		overflow-y:scroll;
+		width:100%;
+		height:100%;
+	
+	}
+}
+

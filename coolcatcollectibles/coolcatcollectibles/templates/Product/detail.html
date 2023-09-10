@@ -1,0 +1,36 @@
+{% extends 'global/page.html' %}
+{% load static %}
+{% block pagestyle %}{% static 'styles/product_detail.css' %}{% endblock %}
+{% block title %} {{product.full_title}} {% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <img class="product-image" src="{{product.picurl}}" alt="">
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card detail-card">
+                <br>
+                Publisher: {{product.publisher_name}}
+                <br>
+                {{product.full_title}}
+                <br>
+                Release Date: {{product.release_date}}
+                <br>
+                {{product.in_collection}} Available
+
+                <form method="post">
+                    {% csrf_token %}
+                    <button type="submit" name="add_to_cart" class="btn btn-primary  addCart">Add to Cart</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

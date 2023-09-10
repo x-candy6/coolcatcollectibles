@@ -1,0 +1,9 @@
+{
+	"Comment": "Insert DJANGO_SECRET_KEY from settings.py below",
+	"DJANGO_SECRET_KEY": "@#fyu5+7o+om+m3c8k#pmz+y^nc7@6dk7c)=u&avw0hdfzik7s",
+	"DATABASE": "coolcatcollectibles",
+	"USER": "coolcat",
+	"PASSWORD": "2Kayak17!@#",
+	"HOST": "localhost",
+	"PORT": 3306
+}
