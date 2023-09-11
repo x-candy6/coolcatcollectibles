@@ -30,7 +30,7 @@ hr{
 }
 .product{
 	border: cyan 3px solid;
-	max-height:80%;
+	height: 100%;
 }
 
 .product-image{
@@ -45,4 +45,12 @@ hr{
 .addCart{
 	width:90%;
 
+}
+
+.filter-attr{
+	overflow:auto;
+	max-height: 50vh;
+	width:100%;
+	border: skyblue 3px solid;
+	border-radius: 5px;
 }

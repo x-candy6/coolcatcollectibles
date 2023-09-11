@@ -7,41 +7,56 @@
 
 {% block body %}
 <div class="content">
-    <div class="container">
-        {% include 'global/pagination.html' %}
-        {% for product in products_per_row %}
-        {% if forloop.counter0|divisibleby:6 %}
-        <div class="row">
-            {% endif %}
-            <div class="col-sm-2 product">
-                <a href="{% url 'Product:product_detail' product.product_id %}">
-                    {% if product.picurl %}
-                    <img src="{{product.picurl}}" class="product-image" alt="" srcset="">
-                    {% else %}
-                    <img src="{% static 'assets/filler/unavailable.jpg' %}" class="product-image" alt="" srcset="">
-                    {% endif%}
-                </a>
-                <br>
-                <small>{{product.publisher_name}}<br><small>{{product.series_name}}</small></small>
-                <br>
-                <a href="{% url 'Product:product_detail' product.product_id %}">{{product.full_title}}</a>
-                <br>
-                <small>{{product.in_collection}} Left</small>
-                <br>
-                <form action="post" method="post">
-                    {% csrf_token %}
-                    <button type="button" name="add_to_cart" class="btn btn-primary  addCart">Add to Cart</button>
-                </form>
-            </div>
-            {% if forloop.counter|divisibleby:6 or forloop.last %}
+    {% include 'global/pagination.html' %}
+
+    <div class="row">
+        <div class="col-sm-2 leftcol">
+            {% include 'global/filter.html' %}
         </div>
-        {% endif %}
-        {% endfor %}
-
-
-
-        {% include 'global/pagination.html' %}
-
+        <div class="col-sm-10">
+            <!-- This is the right column with col-sm-10 -->
+            <div class="row">
+                {% for product in products_per_row %}
+                <div class="col-sm-2 d-flex flex-column">
+                    <!-- Adjust col-sm-2 to your desired column width -->
+                    <div class="product">
+                        <a href="{% url 'Product:product_detail' product.product_id %}">
+                            {% if product.picurl %}
+                            <img src="{{ product.picurl }}" class="product-image" alt="" srcset="">
+                            {% else %}
+                            <img src="{% static 'assets/filler/unavailable.jpg' %}" class="product-image" alt="" srcset="">
+                            {% endif %}
+                        </a>
+                        <br>
+                        <small>{{ product.publisher_name }}<br><small>{{ product.series_name }}</small></small>
+                        <br>
+                        <a href="{% url 'Product:product_detail' product.product_id %}">{{ product.full_title }}</a>
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                ${{product.price}}
+                            </div>
+                            <div class="col-6"></div>
+                            <div class="col-4">
+                                <small>{{ product.in_collection }} Left</small>
+                            </div>
+                        </div>
+                        <form action="post" method="post">
+                            {% csrf_token %}
+                            <div class="flex-grow-1"></div>
+                            <button type="button" name="add_to_cart" class="btn btn-primary addCart">Add to Cart</button>
+                        </form>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:6 or forloop.last %}
+            </div>
+            <div class="row">
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
     </div>
+    {% include 'global/pagination.html' %}
+</div>
 
-    {% endblock %}
+{% endblock %}
