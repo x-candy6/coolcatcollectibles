@@ -1,6 +1,8 @@
 {
 	"Comment": "Insert DJANGO_SECRET_KEY from settings.py below",
 	"DJANGO_SECRET_KEY": "@#fyu5+7o+om+m3c8k#pmz+y^nc7@6dk7c)=u&avw0hdfzik7s",
+	"STRIPE_SECRET_KEY": "sk_test_51NoyuCI1tmVCPUQghOpN5xAVvMYIllfeIsOiSYumesHk3FCLbAe3oXip8kEGIMxOcsnw7UmZloRLnkAivBDWirs100tvURP4sg",
+	"STRIPE_PUBLISHABLE_KEY": "pk_test_51NoyuCI1tmVCPUQgRjWTP0oyF5O2Kf6jaZ51HGtAkUa2Up6npflUjZq0Y5YF0AiMuO31CqTaapdkQdRmLtlvLAoQ004lq8lP0G",
 	"DATABASE": "coolcatcollectibles",
 	"USER": "coolcat",
 	"PASSWORD": "2Kayak17!@#",

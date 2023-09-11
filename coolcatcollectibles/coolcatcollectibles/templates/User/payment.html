@@ -1,0 +1,20 @@
+{% extends 'global/page.html' %}
+{% load static %}
+{% block pagestyle %}{% static 'styles/product_dash.css' %}{% endblock %}
+{% block title %} Job Tracker v0.2 {% endblock %}
+{% block body %}
+<!--INSERT CONTENT-->
+<div class="container">
+    <div class="row">
+        <form action="{% url 'User:payment' %}" method="post">
+            {% csrf_token %}
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ STRIPE_PUBLISHABLE_KEY }}" data-amount="{{amount}}" data-name="My Website" data-description="{{description}}" data-image="https://stripe.com/img/documentation/checkout/marketplace.png" data-locale="{{data-locale}}" data-zip-code="{{data-zip-code}}" data-currency="{{currency}}">
+            </script>
+        </form>
+
+    </div>
+
+
+</div>
+
+{% endblock %}

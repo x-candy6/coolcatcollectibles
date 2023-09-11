@@ -9,15 +9,18 @@ from Product import models as ProductModels
 
 # Create your views here.
 
+
 def home(request):
     return render(request, 'User/home.html')
+
 
 def loginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=username, password=password,  backend='django.contrib.auth.backends.ModelBackend')
+        user = authenticate(request, username=username, password=password,
+                            backend='django.contrib.auth.backends.ModelBackend')
 
         if user is not None:
             login(request, user)
@@ -38,13 +41,10 @@ def loginPage(request):
     return render(request, 'User/login.html')
 
 
-
-
 def logoutPage(request):
     # The following also clears session data
     logout(request)
     return redirect('home')
-
 
 
 def registrationPage(request):
@@ -68,8 +68,10 @@ def registrationPage(request):
 
             if user is not None:
 
-                authenticate(request, username=user.username, password=user.password,  backend='django.contrib.auth.backends.ModelBackend')
-                login(request, user, backend='django.contrib.auth.backends.ModelBackend')
+                authenticate(request, username=user.username, password=user.password,
+                             backend='django.contrib.auth.backends.ModelBackend')
+                login(request, user,
+                      backend='django.contrib.auth.backends.ModelBackend')
 
                 profile = models.Profile(id=user)
                 profile.save()
@@ -79,7 +81,6 @@ def registrationPage(request):
 
                 return render(request, 'User/home.html')
 
-
             else:
                 # There was an error authenticating the newly registered user.
                 return render(request, "User/invalidLogin.html")
@@ -88,4 +89,19 @@ def registrationPage(request):
 
 
 def profile(request):
-    return render(request, 'User/profile.html')
+    profile_form = forms.ProfileForm()
+    context = {
+        'profile_form': profile_form,
+
+    }
+    if request.method == "POST":
+        profile_form = forms.ProfileForm(request.POST)
+
+        if not profile_form.is_valid():
+            print(profile_form.errors)
+            return render(request, "User/profile.html", context)
+        else:
+            profile_form.save(request)
+            return render(request, "User/profile.html", context)
+
+    return render(request, "User/profile.html", context)

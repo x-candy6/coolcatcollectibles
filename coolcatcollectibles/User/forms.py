@@ -7,8 +7,6 @@ from django.forms.widgets import DateInput
 from . import models
 
 
-
-
 class userRegistrationForm(UserCreationForm):
     class Meta:
         model = User
@@ -16,11 +14,15 @@ class userRegistrationForm(UserCreationForm):
         fields = ['username', 'first_name', 'last_name',
                   'email', 'password1', 'password2']
 
-class AddressForm(forms.Form):
-    street = forms.CharField(max_length=100, label='Street Address')
+
+class ProfileForm(forms.Form):
+    street_address = forms.CharField(max_length=100, label='Street Address')
     city = forms.CharField(max_length=50, label='City')
-    state = forms.CharField(max_length=50, label='State')
+    state = forms.CharField(max_length=2, label='State')
     zip_code = forms.CharField(max_length=10, label='ZIP Code')
+
+    class Meta:
+        model = models.Profile
 
 
 class SignUpForm(SignupForm):

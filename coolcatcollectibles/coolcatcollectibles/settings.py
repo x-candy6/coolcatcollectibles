@@ -16,8 +16,7 @@ import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-#print(os.path.join(BASE_DIR, 'home/templates'))
-
+# print(os.path.join(BASE_DIR, 'home/templates'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,6 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 PROJECT_NAME = "coolcatcollectibles"
 config = json.load(open(f"{BASE_DIR}/config.json"))
 SECRET_KEY = config['DJANGO_SECRET_KEY']
+STRIPE_SECRET_KEY = config['STRIPE_SECRET_KEY']
+STRIPE_PUBLISHABLE_KEY = config['STRIPE_PUBLISHABLE_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -39,6 +40,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     "User.apps.UserConfig",
     "Product.apps.ProductConfig",
+
+    "mathfilters",
     "crispy_forms",
     'crispy_bootstrap4',
     "corsheaders",
@@ -93,9 +96,9 @@ SOCIALACCOUNT_PROVIDERS = {
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-#ACCOUNT_FORMS = {
+# ACCOUNT_FORMS = {
 #    'signup': 'User.forms.SignUpForm'
-#}
+# }
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_SESSION_REMEMBER = True
@@ -122,6 +125,9 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            'libraries':{
+                'pagination_filters': f'{PROJECT_NAME}.templatetags.pagination_filters',
+            },
         },
     },
 ]
@@ -135,16 +141,15 @@ WSGI_APPLICATION = f"{PROJECT_NAME}.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "OPTIONS":{
-            "database":config["DATABASE"],
-            "user":config["USER"],
-            "password":config["PASSWORD"],
-            "host":config["HOST"],
-            "port":config["PORT"],
+        "OPTIONS": {
+            "database": config["DATABASE"],
+            "user": config["USER"],
+            "password": config["PASSWORD"],
+            "host": config["HOST"],
+            "port": config["PORT"],
         },
     }
 }
-
 
 
 # Password validation
@@ -183,7 +188,7 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
-        f"./{PROJECT_NAME}/static"
+    f"./{PROJECT_NAME}/static"
 ]
 
 # Default primary key field type

@@ -1,0 +1,47 @@
+{% extends 'global/page.html' %}
+{% load static %}
+{% load pagination_filters %}
+{% load mathfilters %}
+{% block pagestyle %}{% static 'styles/product_dash.css' %}{% endblock %}
+{% block title %} Job Tracker v0.2 {% endblock %}
+
+{% block body %}
+<div class="content">
+    <div class="container">
+        {% include 'global/pagination.html' %}
+        {% for product in products_per_row %}
+        {% if forloop.counter0|divisibleby:6 %}
+        <div class="row">
+            {% endif %}
+            <div class="col-sm-2 product">
+                <a href="{% url 'Product:product_detail' product.product_id %}">
+                    {% if product.picurl %}
+                    <img src="{{product.picurl}}" class="product-image" alt="" srcset="">
+                    {% else %}
+                    <img src="{% static 'assets/filler/unavailable.jpg' %}" class="product-image" alt="" srcset="">
+                    {% endif%}
+                </a>
+                <br>
+                <small>{{product.publisher_name}}<br><small>{{product.series_name}}</small></small>
+                <br>
+                <a href="{% url 'Product:product_detail' product.product_id %}">{{product.full_title}}</a>
+                <br>
+                <small>{{product.in_collection}} Left</small>
+                <br>
+                <form action="post" method="post">
+                    {% csrf_token %}
+                    <button type="button" name="add_to_cart" class="btn btn-primary  addCart">Add to Cart</button>
+                </form>
+            </div>
+            {% if forloop.counter|divisibleby:6 or forloop.last %}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+
+
+        {% include 'global/pagination.html' %}
+
+    </div>
+
+    {% endblock %}

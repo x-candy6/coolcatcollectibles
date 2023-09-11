@@ -20,6 +20,14 @@ hr{
 
 }
 
+.pagination-container{
+	text-align:center;
+}
+
+.pagination-module{
+	display:inline-block;
+	margin:0 auto;
+}
 .product{
 	border: cyan 3px solid;
 	max-height:80%;

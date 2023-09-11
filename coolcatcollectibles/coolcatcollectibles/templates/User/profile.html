@@ -1,0 +1,15 @@
+{% extends 'global/page.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{{request.user}}'s Profile{% endblock %}
+{% block body %}
+
+
+
+<div class="container">
+    {% include 'User/profile_nav.html' %}
+    {% include 'User/shipping_address.html' %}
+
+
+</div>
+
+{% endblock %}

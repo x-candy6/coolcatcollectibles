@@ -7,6 +7,7 @@ class Product(models.Model):
     publisher_name = models.CharField(db_column='Publisher_Name', max_length=50, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     series_name = models.CharField(db_column='Series_Name', max_length=128, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     full_title = models.CharField(db_column='Full_Title', max_length=256, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
+    price = models.DecimalField(db_column='Price', max_digits=13, decimal_places=2, blank=True, null=True)  # Field name made lowercase.
     release_date = models.CharField(db_column='Release_Date', max_length=50, blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
     year = models.IntegerField(db_column='Year', blank=True, null=True)  # Field name made lowercase.
     in_collection = models.IntegerField(db_column='In_Collection', blank=True, null=True)  # Field name made lowercase. Field renamed to remove unsuitable characters.
@@ -40,4 +41,7 @@ class CartItem(models.Model):
         
     def __str__(self):
         return f"{self.quantity} x {self.product.full_title}"
+    
+    def getTotal(self):
+        return self.quantity * self.product.price
 
