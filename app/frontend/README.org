@@ -1,0 +1,149 @@
+#+TITLE: README
+#+DESCRIPTION: Setup and design notes
+#+DATE: 
+
+* Part 1
+** Overview
+This encompasses the frontend prototype for the employee-side of the coolcatcollectibles e-commerce suite.
+
+The backend will be in django. As of right now, the backend components still contain frontend components and the entire site is a messy mixture of react components
+and django-templating. One of the goals of this prototype is to modularize the frontend so that all frontend components will be in the react-app.
+
+** Basic Component Architecture
+#+BEGIN_SRC
+    frontend/
+    ├── src
+    │   ├── static/
+    │       ├── css/
+    │       ├── js/
+    │       ├── media/
+    │           ├── images/
+    │   ├── components/
+    │       ├── api/
+    │       ├── accounts/
+    │       ├── index/
+    │       ├── ecommerce/
+    │           ├── ebay/
+    │   ├── App.js
+    │   ├── index.js
+    │   ├── input.css
+    │   ├── output.css
+    └── tailwind.config.js
+#+END_SRC
+
+** CSS
+*** File Hierarchy
+The root for css stylesheets is index.css.
+App.css depends on index.css and contains the bulk of the styles used for this app.
+In order to edit App.css, edit input.css instead.
+
+#+BEGIN_SRC
+tailwindcss -i ./src/static/css/input.css -o ./src/static/css/App.css --watch
+#+END_SRC
+or use `npx run tailwind-watch`
+
+*** Container Hierarchy
+<Page> Gridbox
+    Row 1 - Navbar
+    <Row 2 - Content> - flexbox
+
+    </Row 2 - Content>
+
+    Row 3 - Footer
+<Page>
+
+** Color Palette
+#1f2937
+#96adcf
+#3a2129
+#cf9eac
+
+
+
+** Sources
+Navbar:
+https://github.com/tailwindlabs/tailwindcss-forms
+https://tailwindui.com/components/application-ui/navigation/navbars
+
+
+** Account Data to send to frontend
+Upon rendering the navbar, check if the user is logged in.
+Display the respective information.
+
+
+x Persist proper information to appropriate contexts such as navbar, logout, register, profile, etc.
+
+TODO
+So currently the token system is broken, instead of using JWT just use django's native token system
+upon login/registering, persist the token in localStorage, 
+upon a page reload, check the token against the db and return the user information
+and upon logout set the token to null
+
+
+----
+* Part 2
+
+** Overview
+There are 9 buttons on the user's home dashboard...
+- Inventory Management: For managing the user's inventory across platforms
+- Analytics: data insights on performance
+- Store: Store websites/official links
+- Shipping Fulfillment: Fast links and automations to handle shipping
+- Customer Service: Replying to customers, etc.
+- Public Relations: Social Media Management
+- Labs: Experimental applications such as automated TikTok Videos
+- Item Procurement: Tracking potential undervalued items for future selling
+- Dashboard Settings: Dashboard tweaks, such as dark-mode etc.
+
+*** Platform Progress Tracking
+So with all of this in mind... it seems like this is a very big project.
+Tracking the progress, creating insights and writeups are important.
+Adjust your professional website so that it handles updates.
+
+*** Priorities
+P1:
+- System Architecture that prioritizes modularity over functionality
+--> The reason for modularity>functionality is because it is a big project and not everything is expected to work right after I code it.
+--> This way, instead of approaching it through a waterfall design, I can consistently reiterate over it all.
+
+- IM
+- Store
+- Website progress tracking
+
+P2: 
+- Dashboard Settings and overall frontend styles
+- Labs
+- Analytics
+
+P3:
+By this milestone, it's expected to have a website modular enough to implement new functionalities
+without hassle so instead of focusing on system architecture, I can focus on the actual code and functionalities itself.
+
+** Inventory Management Section
+*** Brainstorm
+okay so:
+what do I want the IM to be about:
+previously I coded a way to edit ebay inventory stuff through the website.
+I want it to be extendable.
+So not only ebay. but TikTok, etsy, and other marketplaces...
+
+So what happens when you click on IM?
+It would goto another Dashboard. 
+One with options to configure other marketplaces.
+for example it would have the following buttons:
+
+Actual Inventory Management
+- General Inventory: All Inventory Items
+- eBay Inventory: ebay items
+- TikTok Inventory: TikTok Items
+- Etsy Inventory: Etsy Items
+<Separator>
+
+Configurations: without this API calls for ebay inventory management wont work such as adjusting ebay inventory quantity
+- ebay configuration: edit the appID, devid, etc for the current user...
+- tiktok configuration: same as above
+- etsy configuration: same as above
+
+
+
+

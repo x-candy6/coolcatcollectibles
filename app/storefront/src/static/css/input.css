@@ -1,0 +1,170 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@import "./swiper-bundle.min.css";
+/* Format: Navbar */
+/* Format: Page(Container((Card(Content)))) */
+/* Format: Footer */
+body{
+  margin:0;
+  min-width:fit-content;
+  padding:0;
+  background-color: #444e5e;
+}
+
+.page{
+  display: grid;
+}
+.navbar{
+  grid-row: 1;
+}
+
+/* Container Styles */
+.container{
+  grid-row: 2;
+  display:flex;
+  flex-direction: row; 
+  justify-content: space-between;
+  align-items:center;
+  min-width:100%;
+  min-height:75vh;
+}
+.container-left {
+  width:20vw;
+}
+
+.container-mid{
+  width:60vw;
+
+}
+.container-right{
+  width:20vw;
+}
+
+/* Card00 Styles -- this card is used for basic components like logging in and registration. */
+.card01{
+  /* border: 15px solid gray; */
+  padding: 50px;
+  min-width: 100%;
+
+  /* margin: 0 auto; */
+
+}
+
+/* .clickableCard01{
+
+
+} */
+.TableContainer{
+  min-width:100vw;
+
+}
+.TableCard{
+  width:100;
+  margin: 2%;
+  margin-bottom: 5%;
+
+}
+
+.footer{
+  grid-row:3;
+}
+
+.home{
+  padding:1%;
+}
+
+/* Home Item Slideshow */
+.carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.carousel-item {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
+    margin-right: 1rem;
+}
+
+.carousel-container {
+    position: relative;
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 50%;
+}
+
+.carousel-button-left {
+    left: 1rem;
+}
+
+.carousel-button-right {
+    right: 1rem;
+}
+
+.carousel-item img {
+    max-height: 200px;
+    width: auto;
+}
+
+/* Catalog Components */
+/* .catalog-card{
+  
+} */
+
+.catalog-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 3fr; 
+    gap: 20px;
+    padding: 20px;
+}
+.pagination-wrapper {
+    grid-column: 1 / span 2;  /* span across */
+    text-align: center; 
+}
+
+.filter-sidebar {
+    background-color: skyblue;
+}
+
+/* .product-listings {
+} */
+
+.product-listings {
+    background-color: lightpink;
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .product-listings {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .product-listings {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-listings {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) {
+    .product-listings {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

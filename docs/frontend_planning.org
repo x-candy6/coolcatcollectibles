@@ -1,0 +1,26 @@
+* So i'm using the UO site as a reference
+
+for the shopping categories I want:
+
+- all are dropout menus
+Publishers
+
+Superheroes
+
+Era
+
+Misc Collectibles
+
+Sale
+
+* new day
+okay So
+create holders for the home page...
+connect the db
+create views to view db data
+
+-these do not need to be styled right now-
+create the product listing page
+create a basic product page
+
+- create proper views for the profile(add cart)

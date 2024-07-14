@@ -1,0 +1,51 @@
+* June 26
+ok so I made static pages for Products, Carts, and Catalogs
+and i made models for customers(i.e. Cart, CartItems, Orders, Wishlists)
+
+Theres some issue with UserSettings not persisting the user, it sets user to null
+
+what next?
+okay so next I want to get the catalog/product pages working with the backend.
+The Catalog page is dynamic, You can view it via publishers/superheroes etc or all
+
+So the catalog href would be like /catalog/sortby={publisher} and what not.
+make a view for returning all items via ^^^ API call
+
+The catalog api call will return a list of json dicts each with a product
+pagination will be necessary
+and dynamic rendering based on the user's screen etc
+
+each product is tied to the product id, so when the user clicks on the product it will return a page like:
+/product/321
+with the respective information
+so the user clicks on the product
+the API is made to retrieve the product information(a single dict)
+react redirects the user to the /product/321
+right now whats a bit confusing is, will the user land on /product/321 or /product?
+it'd be easy to do /product but i want /product/321
+
+So the product href should be /product/321
+
+--
+so the catalog basic feature is complete now I need to fix all the little bugs.
+It only works for the /catalog/publishers/{NAME} call so I need to code the other options.
+Ideally I could've done it dynamically but I've found that the api calls don't match with the table column names and I can't use setattr in this situation.
+But for now since the amount of categories wont change, i'll leave it as is.
+
+I need to update the prices for all comics as well.
+
+Next up:
+Complete the search portion of catalog, right now the API calls are coded so it wont be much thinking but a lot of coding.
+The next priority is to set up the cart.
+and then checkout.
+and then configure order logging.
+and then to optimize the user sessions feature to allow for guest users.
+and then I will be at a point where it is close to an alpha release, where everything is semi-functional and if a user really wanted, they would be able to make a purchase.
+Then, i'll be able to fix the smaller issues such as styling, email, and what not.
+I also need to scrape all product images and reupload them to a different cdn since the current one isn't as fast(it's not meant to be used as a cdn...)
+I will also have to tweak the inventory table to allow for proper tags and descriptions along with some separate python scripts(This portion will be in the frontend/labs section).
+These separate scripts will help with styling, like one of them will clean up the product image so that it looks more presentable.
+Another will query external comic db's for more information pertaining to each comic such as the superheroes involved, summaries, key issues and what not.
+Another will utilize cv to query popular marketplaces for the individual book and set the price to match.
+Regardless those will be in a while.
+

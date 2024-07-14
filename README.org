@@ -1,0 +1,67 @@
+#+TITLE:coolcatcollectibles - A Full-Stack E-Commerce Web Application
+#+AUTHOR:AndrewC
+#+DESCRIPTION:coolcatcollectibles is a comprehensive e-commerce platform for selling used comic books. The development proposes extensive tools used for marketing, inventory management, customer relations and other facets of the e-commerce pipeline. This repository also contains the code for the store website itself. 
+#+DATE:<2024-06-26 Wed>
+
+* CoolCatCollectibles
+** Last Updated: <2024-06-26 Wed>
+** STATUS: Prototype
+** Technologies Used: Django(backend), ReactJS(Frontend), Tailwind CSS(Styling), MySQL, Various Cloud Providers
+
+* Kanban
+|-----------------------------------------------------------------------+-----------------------------------+----------------------------------------------------------------|
+| TODO                                                                  | DOING                             | DONE                                                           |
+|-----------------------------------------------------------------------+-----------------------------------+----------------------------------------------------------------|
+|                                                                       |                                   | Basic Routing for Frontend Components                          |
+|                                                                       |                                   | Basic Styling                                                  |
+|                                                                       |                                   | Database Models Complete                                       |
+|                                                                       |                                   | User Authentication and Session-Persistence                    |
+|                                                                       |                                   | Product Database and Connection to external commerce platforms |
+|                                                                       |                                   | Inventory Management                                           |
+|                                                                       | Iterate over styling              |                                                                |
+| E-Mail Configuration                                                  |                                   |                                                                |
+|                                                                       | User Settings                     |                                                                |
+|                                                                       | Payment Processing                |                                                                |
+|                                                                       | Convert shell scripts to web-apps |                                                                |
+| Migration to Cloud Provider                                           |                                   |                                                                |
+| Advertising Tools                                                     |                                   |                                                                |
+| Database optimization                                                 |                                   |                                                                |
+| Connection to local server so I can connect and work on this remotely |                                   |                                                                |
+| .                                                                     |                                   |                                                                |
+| .                                                                     |                                   |                                                                |
+| .                                                                     |                                   |                                                                |
+|-----------------------------------------------------------------------+-----------------------------------+----------------------------------------------------------------|
+
+
+* Motivations
+Last year, I coded a simple script to allow me to keep track of undervalued eBay items and subsequently automate the bidding process. I wound up purchasing ~7000 comic books for a whopping $0.06 a piece.
+With a room full of comic book boxes, my next objective was to sell these undervalued items to gain a profit.
+The first steps were to catalog and organize the physical inventory which had taken quite the time since it was one of the processes that I couldn't automate(a lot of physical labor).
+Afterwards I was able to automate the listing/fulfillment process on eBay and gained a new stream of passive income. 
+Whilst constantly reiterating over the automation tools I created, I was able to sell to ~1500 customers over a single year.
+
+I want to improve on what I have and am therefore prototyping this web application to manage selling-tools as well as to have a singular platform to sell used books on instead of relying on eBay as a middleman(They take about 13% out of each sale).
+While I initially had used Shopify, I tended to notice some discrepancies that made it economically inefficient to sell books on.
+Therefore I started to prototype this web-application so I can fully independently sell used books as well as easily access the tools I created in the past.
+In that sense it consists of:
+- The main backend API via Django
+- The Frontend for the administrative side(a portal to access and use e-commerce automations such as advertising)
+- and the Storefront(written in react).
+
+It's a bit confusing since the Storefront should be included inside the Frontend component, but later I will rename the Frontend to Administration so that there is a clear discrepancy.
+
+* Purpose
+Personally, this is a project of large scale. In the future maybe I will be able to utilize collaborators to meet the goals of this project however the purpose of this public repository is to simply organize the iteration component of this project's progress.
+
+
+
+
+
+
+
+
+
+
+
+
+

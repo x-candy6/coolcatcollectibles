@@ -1,0 +1,44 @@
+* db models
+
+so we have 3 tables
+Cart, Orders, CartItems
+
+The user places items in a Cart in the newest cart for the customer, for each Item a cartitem is created
+when user presses cart, retrieve max cart_id for the user
+cart_id, customer_id
+user will adjust cart as necessary
+
+Checksout
+upon a successful checkout, the qty will be updated in the products db
+an order is created and a new cart is created for the customer
+
+each record in the OrderItems will pertain to a single item with a set qty
+they are tied to the order_id and has the customer_id for reference
+so it will look like:
+order_item_id, order_id, customer_id, status, product_id, qty
+
+once all orderitems are status'd as fulfilled it will set the order to fulfilled
+
+* July 10, 2024
+- coding the catalog function fully from the prototype.
+implementing categories:
+Publishers
+Characters
+Time Eras
+Misc.
+SALE
+
+Need to add the following columns
+Characters, Time Era, Sale, Sale Percentage
+
+
+* When you work on ebay scripts:
+need to fix the script to update db price data with ebays accordingly
+
+* July 11 2024
+so todays work will be on sessions
+sessions
+cart
+payment processing
+
+in between, will probably need to tweak the user/profile section.

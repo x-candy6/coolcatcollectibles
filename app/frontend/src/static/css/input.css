@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Format: Navbar */
+/* Format: Page(Container((Card(Content)))) */
+/* Format: Footer */
+body{
+  margin:0;
+  min-width:fit-content;
+  padding:0;
+  background-color: #444e5e;
+}
+
+.page{
+  display: grid;
+}
+.navbar{
+  grid-row: 1;
+}
+
+/* Container Styles */
+.container{
+  grid-row: 2;
+  display:flex;
+  flex-direction: row; 
+  justify-content: space-between;
+  align-items:center;
+  min-width:100%;
+  min-height:75vh;
+}
+.container-left {
+  width:20vw;
+}
+
+.container-mid{
+  width:60vw;
+
+}
+.container-right{
+  width:20vw;
+}
+
+/* Card00 Styles -- this card is used for basic components like logging in and registration. */
+.card01{
+  /* border: 15px solid gray; */
+  padding: 50px;
+  /* margin: 0 auto; */
+
+}
+
+/* .clickableCard01{
+
+
+} */
+.TableContainer{
+  min-width:100vw;
+
+}
+.TableCard{
+  width:100;
+  margin: 2%;
+  margin-bottom: 5%;
+
+}
+
+.footer{
+  grid-row:3;
+}

@@ -1,0 +1,102 @@
+#+TITLE: Project Status Report: coolcatcollectibles
+#+AUTHOR:AndrewC
+#+DESCRIPTION:
+#+CURRENT_STATUS:
+#+DATE:<2024-07-11 Thu>
+
+* Project Overview
+This e-commerce app is the conglomeration of two main projects:
+- The creation of an iterable and functional storefront.
+- The creation of an iterable frontend interface for managing e-commerce needs.
+
+* Priority Chart
+** Priority 1
+*** Creating the backbone API for all future functionalities
+*** Creating an easily iterable frontend to interface with the backend API
+
+** Priority 2
+
+* Gantt Chart
+
+#+tblname: gantt-chart
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+| Task                       | Estimated Effort(units) | Start (Datetime) | End (Datetime) | Spent (units) | Progress(Percentage) | Projected Effort(units) | Over/Undertime(Type) |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+| Prototype Development      |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+| Project Setup              |                         |                  |                |               |                      |                         |                      |
+| Basic Routing and Skeleton |                         |                  |                |               |                      |                         |                      |
+|                            |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+| Backend API                |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+|                            |                         |                  |                |               |                      |                         |                      |
+|                            |                         |                  |                |               |                      |                         |                      |
+|                            |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+| Frontend                   |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+|                            |                         |                  |                |               |                      |                         |                      |
+|                            |                         |                  |                |               |                      |                         |                      |
+|                            |                         |                  |                |               |                      |                         |                      |
+|----------------------------+-------------------------+------------------+----------------+---------------+----------------------+-------------------------+----------------------|
+
+
+** Priority 3
+
+* Kanban Board
+|------+-------+------|
+| TODO | DOING | DONE |
+|------+-------+------|
+|      |       |      |
+|      |       |      |
+|      |       |      |
+|      |       |      |
+|------+-------+------|
+
+
+* Milestones and Deliverables
+
+* Risks and Issues
+
+* Resource Allocation
+
+* Decisions Made
+
+* Developer Notes
+** <2024-07-11 Thu>
+Today I will be working on: Project Management Setup & Session Management
+There is basic session management implemented already as a result of the prototype but I will be iterating on how Guest Sessions are persisted and converted to Registered_User sessions.
+The rough plan:
+- This week, work on backend
+  --> iterate upon product catalogs, carts, payment processing
+  --> In order to do that, users and sessions need to advanced because all of these rely on sessions and users.
+  --> Yesterday(<2024-07-10 Wed>) I worked on catalogs and the filtering components which don't need sessions and users.
+  --> After users and sessions meet a certain storypoint, I will work on carts, orders, and payment processing.
+
+- Assuming all goes to plan(the backend will be significantly more functional), next week I will iterate upon the frontend and stylings.
+- Afterwards, I have to migrate production data to the development environment to fix minor issues.
+- Then I will continue to fix minor/major issues for another week. 
+- At this point, the storefront will be in an alpha stage and can be deployed to a cloud server.
+
+- It is at this point where, Part 1 will be completed and needs to be maintained and iterated upon.
+- Part 2 will extend upon the administrative dashboard, which is probably 1/3 web development, and 2/3 scripting.
+
+*** Page.js
+So Page.js wraps around every webpage in this app.
+Thus, when a user triggers Page.js the following should happen:
+useEffect runs
+-> Retrieve token
+
+-> If there is a token, 
+--> validate the token: validate_session_token
+----> 404, no token, issue_guest_token
+----> 400, invalid token, issue_guest_token
+----> 401, expired token, refresh_session_token
+----> 200, proceed
+
+--> If the token is expired, refresh it and set the localStorage('token') to the new access token
+--> If it is valid, proceed.
+
+-> If there isn't a token,
+--> issue a new session token and set localStorage('token') accordingly
