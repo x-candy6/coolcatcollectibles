@@ -1,0 +1,126 @@
+{
+    "Django": {
+        "DJANGO_SECRET_KEY": ""
+    },
+    "Database": {
+        "database": "",
+        "user": "",
+        "password": "",
+        "host": "",
+        "port": 3306
+    },
+    "Production": {
+        "AppID": "",
+        "DevID": "",
+        "CertID": "",
+        "Auth-n-Auth": "",
+        "Oauth": "",
+        "RefreshToken": "",
+        "RuName": "",
+        "locale": "en-US",
+        "State": null
+    },
+    "OAuth_Scopes": {
+        "marketingRO": {
+            "Name": "marketingRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.marketing.readonly",
+            "Description": "View your eBay marketing activities, such as ad campaigns and listing promotions"
+        },
+        "marketing": {
+            "Name": "marketing",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.marketing",
+            "Description": "View and manage your eBay marketing activities, such as ad campaigns and listing promotions"
+        },
+        "inventoryRO": {
+            "Name": "inventoryRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.inventory.readonly",
+            "Description": "View your inventory and offers"
+        },
+        "inventory": {
+            "Name": "inventory",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.inventory",
+            "Description": "View and manage your inventory and offers"
+        },
+        "accountRO": {
+            "Name": "accountRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.account.readonly",
+            "Description": "View your account settings"
+        },
+        "account": {
+            "Name": "account",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.account",
+            "Description": "View and manage your account settings"
+        },
+        "fulfillmentRO": {
+            "Name": "fulfillmentRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.fulfillment.readonly",
+            "Description": "View your order fulfillments"
+        },
+        "fulfillment": {
+            "Name": "fulfillment",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.fulfillment",
+            "Description": "View and manage your order fulfillments"
+        },
+        "analyticsRO": {
+            "Name": "analyticsRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.analytics.readonly",
+            "Description": "View your selling analytics data, such as performance reports"
+        },
+        "finances": {
+            "Name": "finances",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.finances",
+            "Description": "View and manage your payment and order information to display this information to you and allow you to initiate refunds using the third party application"
+        },
+        "payment": {
+            "Name": "payment",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.payment.dispute",
+            "Description": "View and manage disputes and related details (including payment and order information)"
+        },
+        "identityRO": {
+            "Name": "identityRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/commerce.identity.readonly",
+            "Description": "View a user's basic information, such as username or business account details, from their eBay member account"
+        },
+        "reputation": {
+            "Name": "reputation",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.reputation",
+            "Description": "View and manage your reputation data, such as feedback"
+        },
+        "reputationRO": {
+            "Name": "reputationRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.reputation.readonly",
+            "Description": "View your reputation data, such as feedback"
+        },
+        "notification": {
+            "Name": "notification",
+            "URL": "https://api.ebay.com/oauth/api_scope/commerce.notification.subscription",
+            "Description": "View and manage your event notification subscriptions"
+        },
+        "notificationRO": {
+            "Name": "notificationRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/commerce.notification.subscription.readonly",
+            "Description": "View your event notification subscriptions"
+        },
+        "sell": {
+            "Name": "sell",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.stores",
+            "Description": "View and manage eBay stores"
+        },
+        "sellRO": {
+            "Name": "sellRO",
+            "URL": "https://api.ebay.com/oauth/api_scope/sell.stores.readonly",
+            "Description": "View eBay stores"
+        },
+        "api_scope": {
+            "Name": "api_scope",
+            "URL": "https://api.ebay.com/oauth/api_scope",
+            "Description": "View public data from eBay"
+        }
+    },
+    "categoryID": {
+        "comics": {
+            "name": "/Collectibles/Comic Books & Memorabilia/Comics/Comics & Graphic Novels",
+            "ID": 259104
+        }
+    }
+}
