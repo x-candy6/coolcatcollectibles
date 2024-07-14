@@ -11,4 +11,8 @@ urlpatterns = [
     path('api/session/refresh_token/', views.refresh_session_token, name='refresh_session_token'),
     path('api/session/issue_token/', views.issue_session_token, name='issue_session_token'),
 
+    path('api/cart/add/', views.add_to_cart, name='add_to_cart'),
+    path('api/cart/remove/', views.remove_from_cart, name='remove_from_cart'),
+    path('api/cart/update/', views.update_cart, name='update_cart'),
+
 ]

@@ -100,3 +100,19 @@ useEffect runs
 
 -> If there isn't a token,
 --> issue a new session token and set localStorage('token') accordingly
+
+** JL14-24
+had to fix the repo after accidentally uploading keys, accidentally erased the repo lol, reverted back to previous commit and just made a new repo
+not good practice, but it worked.
+
+okay so, i'm implementing the GuestCart today.
+which means, when a user clicks on add to cart, 
+an API call will be sent along with their sessionID, 
+I should also create a new boolean state to see if the user is authenticated(?)
+
+but right now, i'll just code the scaffolding to make the guest cart functional.
+I'll iterate upon that later.
+
+
+
+

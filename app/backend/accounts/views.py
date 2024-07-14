@@ -185,3 +185,19 @@ def logoutUser(request):
         logout(request)
         return JsonResponse({'message': "Logout successful. "}, status=200)
 
+
+@csrf_exempt
+def add_to_cart(request):
+    return
+
+@csrf_exempt
+def remove_from_cart(request):
+    return
+
+@csrf_exempt
+def update_cart(request):
+    return
+
+@csrf_exempt
+def merge_cart(request):
+    return
