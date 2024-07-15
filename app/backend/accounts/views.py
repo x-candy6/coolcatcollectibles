@@ -188,16 +188,46 @@ def logoutUser(request):
 
 @csrf_exempt
 def add_to_cart(request):
-    return
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        sessionID = models.Session.objects.get(sessionid=data.get('sessionID'))
+        itemID = data.get('itemID')
+        qty = data.get('qty')
+        print(sessionID, itemID, qty)
+
+        # add try/except block
+        retrievedProduct = models.Inventory.objects.get(item_id=itemID)
+        print(retrievedProduct.full_title)
+
+        # Retrieve/create cart associated with session if exists
+        guest_cart, created = models.GuestCart.objects.get_or_create(session_id=sessionID)
+
+        guest_cart_item, created = models.GuestCartItems.objects.get_or_create(
+            product_id=retrievedProduct,
+            guest_cart_id = guest_cart,
+            session_id=sessionID  # change to fk instead of hardcoded value
+        )
+        if not created:
+            guest_cart_item.qty=qty
+            guest_cart_item.save()
+        else:
+            guest_cart_item.qty = qty
+            guest_cart_item.save()
+
+    return JsonResponse({'message': "Added item to cart. "}, status=200)
 
 @csrf_exempt
 def remove_from_cart(request):
-    return
+    return JsonResponse({'message': "Logout successful. "}, status=200)
 
 @csrf_exempt
 def update_cart(request):
-    return
+    return JsonResponse({'message': "Logout successful. "}, status=200)
 
 @csrf_exempt
 def merge_cart(request):
-    return
+    return JsonResponse({'message': "Logout successful. "}, status=200)
+
+@csrf_exempt
+def get_cart(request):
+    return JsonResponse({'message': "Logout successful. "}, status=200)

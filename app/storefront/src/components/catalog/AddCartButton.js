@@ -1,9 +1,28 @@
-function AddCartButton( {itemInfo} ) {
+import API from "../api/API"
+import { useState } from "react";
 
-    const handleClick = () => {
+function AddCartButton( {itemInfo} ) {
+    const [cartItem, setCartItem] = useState({
+        "sessionID": localStorage.getItem('session-id'),
+        "itemID":itemInfo.item_id,
+        "qty": 1, // TODO Change this to be dynamic later
+    })
+    const [success, setSuccess] = useState(false); // TODO will be used later to turn the T to a checkmark, and to popup a modal on error
+
+	const handleClick = async e => {
+        e.preventDefault()
         console.log(localStorage.getItem('session-id')); 
         console.log(itemInfo.item_id); 
 
+	    try {
+	        const response = await API.postData('/user/api/cart/add/',  cartItem);
+		    console.log(response)
+
+	        console.log("Successfully added to cart");
+	        setSuccess(true);
+	    } catch (error) {
+	        console.error('Add to Cart failed:', error);
+	    }
     };
 
     return ( 
