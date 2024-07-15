@@ -1,8 +1,14 @@
-import { useState } from "react";
+import API from "../api/API";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../global/Card";
 
 function Cart() {
+
+// fetch the relevant cart
+// fetch the items from the inventory table
+// display information
+
     // Dummy data
     const [cartItems, setCartItems] = useState([
         {
@@ -20,6 +26,28 @@ function Cart() {
             image: "https://via.placeholder.com/150",
         },
     ]);
+
+    useEffect(() => {
+
+        const retrieveCart = async () => {
+            console.log("Retrieving cart...");
+            let url = '/user/api/cart/get/';
+            // TODO If authenticated retrieve const user
+            try {
+                const response = await API.getData(url)
+                console.log("Cart retrieved:", response)
+                setCartItems(response.cart_items)
+            } catch (error){
+                console.log("Cart not retrieved:", error)
+
+            }
+
+
+        }
+        retrieveCart()
+
+
+    }, [])
 
     // Function to calculate total cart amount
     const calculateTotal = () => {

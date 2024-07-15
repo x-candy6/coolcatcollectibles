@@ -1,3 +1,4 @@
+import secrets
 from django.db import models
 from django.contrib.auth.models import User
 from inventory.models import Inventory
@@ -79,9 +80,10 @@ class GuestCartItems(models.Model):
         db_table = 'guest_cart_items'
 
 class Session(models.Model):
+    id = models.BigAutoField(primary_key=True)
     sessionid = models.CharField(db_column='sessionID', unique=True, max_length=64)  # Field name made lowercase.
     expire_timestamp = models.DateTimeField(blank=True, null=True)
-    created_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
     access_token = models.CharField(max_length=512, blank=True, null=True)
     refresh_token = models.CharField(max_length=512, blank=True, null=True)
@@ -89,6 +91,11 @@ class Session(models.Model):
     class Meta:
         managed = True
         db_table = 'session'
+
+    def save(self, *args, **kwargs):
+        if not self.sessionid:
+            self.sessionid = secrets.token_hex(32)
+        super(Session, self).save(*args, **kwargs)
 
 
 

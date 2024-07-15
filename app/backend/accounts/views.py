@@ -1,4 +1,5 @@
 from django.http import JsonResponse
+from django.core import serializers
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -19,10 +20,19 @@ from . import models
 
 @csrf_exempt
 def issue_session_token(request):
+
+    session = models.Session.objects.create()
+    print(session.sessionid)
+
+    # TODO if user is authenticated, set the userID parameter
     session_token = RefreshToken()
+
     access_token = str(session_token.access_token)
     refresh_token = str(session_token)
+
+    session_token['sessionid'] = session.sessionid
     return JsonResponse({
+        'session_id': session.sessionid,
         "access_token": access_token,
         "refresh_token": refresh_token
     }, status=200)
@@ -36,13 +46,14 @@ def validate_session_token(request):
     print(access_token)
     # No Token Found
     if not access_token:
+        print('No access token found in headers...')
         return JsonResponse({'error': 'No token found.'}, status=404)
     try:
         # Validate Token
         access_token = AccessToken(access_token)
 
-        if access_token.is_expired: # Check if expired
-            return JsonResponse({'error': 'Expired token.'}, status=401)
+        #if access_token.is_expired: # Check if expired
+        #    return JsonResponse({'error': 'Expired token.'}, status=401)
 
     except (TokenError) as e: # Invalid Token
         return JsonResponse({'error': f'TokenError'}, status=400)
@@ -55,7 +66,8 @@ def validate_session_token(request):
 
 @csrf_exempt
 def refresh_session_token(request):
-    refresh_token = request.headers.get('session_refresh_token')
+    refresh_token = request.headers.get('session-refresh-token')
+    session_id = request.headers.get('session-id')
 
     if not refresh_token:
         return JsonResponse({'error': 'No refresh token found.'}, status=404)
@@ -64,6 +76,7 @@ def refresh_session_token(request):
     refresh_token = str(refresh)
 
     return JsonResponse({
+        'session_id': session_id,
         "access_token": access_token,
         "refresh_token": refresh_token
     }, status=200)
@@ -228,6 +241,26 @@ def update_cart(request):
 def merge_cart(request):
     return JsonResponse({'message': "Logout successful. "}, status=200)
 
+@api_view(['GET'])
 @csrf_exempt
 def get_cart(request):
-    return JsonResponse({'message': "Logout successful. "}, status=200)
+    print("getting cart...")
+    print(request.headers['session-id'])
+    sessionID = models.Session.objects.get(sessionid=request.headers['session-id'])
+    cart = models.GuestCart.objects.get(session_id=sessionID.sessionid)
+    raw_cart_items = models.GuestCartItems.objects.filter(guest_cart_id=cart.guest_cart_id)
+    cart_items = []
+
+    for item in raw_cart_items:
+        product = models.Inventory.objects.get(item_id=item.product_id_id)
+        cart_items.append({
+            'id': product.item_id,
+            'title': product.full_title,
+            'quantity': item.qty,
+            'price': float(product.price),
+            'image': product.picurl
+        })
+    
+
+
+    return JsonResponse({'cart_items':cart_items}, safe=False,status=200)
