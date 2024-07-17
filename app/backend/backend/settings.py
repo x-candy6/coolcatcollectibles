@@ -46,6 +46,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "payment.apps.PaymentConfig",
     "accounts.apps.AccountsConfig",
     "inventory.apps.InventoryConfig",
     'rest_framework_simplejwt',

@@ -113,6 +113,10 @@ I should also create a new boolean state to see if the user is authenticated(?)
 but right now, i'll just code the scaffolding to make the guest cart functional.
 I'll iterate upon that later.
 
+** J16-24
+
+
+
 
 
 
