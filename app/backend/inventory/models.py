@@ -42,18 +42,18 @@ class Inventory(models.Model):
 class StripeProduct(models.Model):
     product_id = models.CharField(primary_key=True, max_length=128)
     item_id = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True)  # Field name made lowercase.
     unit_amount = models.DecimalField(max_digits=10, decimal_places=2)  # Assuming price is stored as DecimalField in Inventory
     currency = models.CharField(max_length=16, default='usd')
     
-    name = models.CharField(max_length=255)  # Assuming full_title is stored as CharField in Inventory
-    description = models.TextField(blank=True, null=True)  # You can link this to Inventory's description if needed
+    description = models.TextField(blank=True, null=True)  
     item_object = models.CharField(max_length=64, default="product", blank=True, null=True)
     is_active = models.BooleanField(default=False)
-    shippable = models.BooleanField(default=True)
+    shippable = models.BooleanField(null=True)
     tax_code = models.IntegerField(default=99999999, blank=True)
 
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    created_at = models.IntegerField(blank=True)
+    updated_at = models.IntegerField(blank=True)
     images = models.CharField(max_length=255)  # Assuming picurl is stored as CharField in Inventory
     url = models.CharField(max_length=128, blank=True, null=True)
 
@@ -61,11 +61,11 @@ class StripeProduct(models.Model):
         managed = True
         db_table = 'stripe_product'
 
-    def save(self, *args, **kwargs):
-        if isinstance(self.created_at, int):  # Check if created_at is a Unix timestamp
-            self.created_at = datetime.datetime.fromtimestamp(self.created_at)
-            self.updated_at = datetime.datetime.fromtimestamp(self.created_at)
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if isinstance(self.created_at, int):  # Check if created_at is a Unix timestamp
+    #         self.created_at = datetime.datetime.fromtimestamp(self.created_at)
+    #         self.updated_at = datetime.datetime.fromtimestamp(self.created_at)
+    #     super().save(*args, **kwargs)
 
 # Table for viewing all literature actors associated with a single piece(connected to inventory)
 class Characters(models.Model):

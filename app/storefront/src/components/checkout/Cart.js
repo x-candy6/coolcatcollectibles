@@ -1,4 +1,5 @@
 import API from "../api/API";
+import { redirect } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../global/Card";
@@ -27,6 +28,7 @@ function Cart() {
         },
     ]);
 
+
     useEffect(() => {
 
         const retrieveCart = async () => {
@@ -53,6 +55,25 @@ function Cart() {
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
+
+    const PayWithStripeButton = () => {
+        const handleClick = async () => {
+            // Fetch the Checkout session from your backend
+            const formData = {
+                line_items: cartItems
+            }
+            try{ 
+                const response = await API.postData('/orders/api/payments/stripe_checkout/', formData);
+                return redirect(response.checkout_session_url)
+
+            } catch (error) {
+                console.log("PayWithStripeButton Error")
+            }
+
+
+
+        };
+
 
     return (
         <Card>
@@ -89,7 +110,7 @@ function Cart() {
             </div>
 
             {/* Checkout button */}
-            <div className="mt-8 flex justify-end">
+            <div className="border-solid border-2 border-indigo-600 mt-8 flex justify-end">
                 <a href="/checkout">
                     <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md">
                         Proceed to Checkout

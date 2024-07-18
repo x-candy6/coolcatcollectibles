@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.http import JsonResponse
 from django.core import serializers
 from django.shortcuts import get_object_or_404, render, redirect
@@ -17,30 +18,25 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 import json
 from . import models
+import stripe
 
-@api_view(['GET'])
 @csrf_exempt
-def validate_session_token(request):
-
-    # Get Token
-    access_token = request.headers.get('session-access-token')
-    print(access_token)
-    # No Token Found
-    if not access_token:
-        print('No access token found in headers...')
-        return JsonResponse({'error': 'No token found.'}, status=404)
+def stripe_checkout(request):
     try:
-        # Validate Token
-        access_token = AccessToken(access_token)
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            line_items = data.get('line_items')
+            checkout_session = stripe.checkout.Session.create(
+                line_items = line_items,
+                mode='payment',
+                success_url= settings.DOMAIN_NAME + '/checkout/stripe/success',
+                cancel_url= settings.DOMAIN_NAME + '/checkout/stripe/cancel',
+                automatic_tax={'enabled': True}
+            )
 
-        #if access_token.is_expired: # Check if expired
-        #    return JsonResponse({'error': 'Expired token.'}, status=401)
+    except Exception as e:
+        print(str(e))
+        return JsonResponse({}, status=400)
 
-    except (TokenError) as e: # Invalid Token
-        return JsonResponse({'error': f'TokenError'}, status=400)
-    except (InvalidToken) as e: # Invalid Token
-        return JsonResponse({'error': f'Invalid Token'}, status=400)
+    return JsonResponse({"checkout_session_url":checkout_session.url}, status=303)
 
-
-    # Token is valid
-    return JsonResponse({'message': 'Token is valid.'}, status=200)
