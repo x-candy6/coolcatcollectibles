@@ -1,8 +1,15 @@
-import { useState } from "react";
+import API from "../api/API";
+import { redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Card from "../global/Card";
 
 function Cart() {
+
+// fetch the relevant cart
+// fetch the items from the inventory table
+// display information
+
     // Dummy data
     const [cartItems, setCartItems] = useState([
         {
@@ -21,10 +28,56 @@ function Cart() {
         },
     ]);
 
+
+    useEffect(() => {
+
+        const retrieveCart = async () => {
+            console.log("Retrieving cart...");
+            let url = '/user/api/cart/get/';
+            // TODO If authenticated retrieve const user
+            try {
+                const response = await API.getData(url)
+                console.log("Cart retrieved:", response)
+                setCartItems(response.cart_items)
+            } catch (error){
+                console.log("Cart not retrieved:", error)
+
+            }
+
+
+        }
+        retrieveCart()
+
+
+    }, [])
+
     // Function to calculate total cart amount
     const calculateTotal = () => {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
+
+    const PayWithStripeButton = async () => {
+        // Fetch the Checkout session from your backend
+        const formData = {
+            line_items: cartItems
+        }
+        try{ 
+            const response = await API.postData('/orders/api/payments/stripe_checkout/', formData);
+
+        } catch (error) {
+            console.log(error.response.data.checkout_session_url)
+
+            if (error.response.status === 303){
+                 window.location.href = error.response.data.checkout_session_url
+            } else{
+                console.log(error.response.status)
+                console.log("PayWithStripeButton Error:", error)
+
+            }
+        }
+
+    };
+
 
     return (
         <Card>
@@ -60,13 +113,14 @@ function Cart() {
                 <p className="text-xl font-semibold">${calculateTotal()}</p>
             </div>
 
-            {/* Checkout button */}
-            <div className="mt-8 flex justify-end">
-                <a href="/checkout">
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md">
-                        Proceed to Checkout
-                    </button>
-                </a>
+            {/* Stripe Checkout button */}
+            <div className="border-solid border-2 border-indigo-600 mt-8 flex justify-end">
+                <button 
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md"
+                    onClick={PayWithStripeButton}
+                >
+                    Pay with Stripe
+                </button>
             </div>
         </div>
         </Card>

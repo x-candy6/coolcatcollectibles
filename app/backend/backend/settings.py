@@ -1,4 +1,5 @@
 import os
+import stripe
 from datetime import timedelta
 from pathlib import Path
 import json
@@ -25,8 +26,10 @@ print(BASE_DIR)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 PROJECT_NAME = "backend"
+DOMAIN_NAME = "localhost:3000"
 CONFIG = json.load(open(f"{BASE_DIR}/config.json"))
 SECRET_KEY = CONFIG['Django']['DJANGO_SECRET_KEY']
+stripe.api_key = CONFIG['Stripe']['SecretKey']
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -46,6 +49,7 @@ ALLOWED_HOSTS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "payment.apps.PaymentConfig",
     "accounts.apps.AccountsConfig",
     "inventory.apps.InventoryConfig",
     'rest_framework_simplejwt',
@@ -161,6 +165,7 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
+    'session-id',
     'session-access-token',
     'session-refresh-token',
 ]

@@ -1,3 +1,4 @@
+import secrets
 from django.db import models
 from django.contrib.auth.models import User
 from inventory.models import Inventory
@@ -39,23 +40,64 @@ class Orders(models.Model):
         managed = True
         db_table = 'orders'
 
-class Cart(models.Model):
-    cart_id = models.AutoField(primary_key=True)
+class UserCart(models.Model):
+    user_cart_id = models.AutoField(primary_key=True)
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     class Meta:
         managed = True
-        db_table = 'cart'
+        db_table = 'user_cart'
 
-class CartItems(models.Model):
-    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE)
+class UserCartItems(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    user_cart_id = models.ForeignKey(UserCart, on_delete=models.CASCADE)
     customer_id = models.ForeignKey(User, on_delete=models.CASCADE)
     product_id = models.ForeignKey(Inventory, on_delete=models.DO_NOTHING)
     qty = models.IntegerField()
 
     class Meta:
         managed = True
-        db_table = 'cart_items'
+        db_table = 'user_cart_items'
+
+class GuestCart(models.Model):
+    guest_cart_id = models.AutoField(primary_key=True)
+    session_id = models.ForeignKey('Session', models.DO_NOTHING, to_field='sessionid')
+
+    class Meta:
+        managed = True
+        db_table = 'guest_cart'
+
+
+class GuestCartItems(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    qty = models.IntegerField(blank=True, null=True)
+    guest_cart_id = models.ForeignKey(GuestCart, models.DO_NOTHING)
+    product_id = models.ForeignKey(Inventory, models.DO_NOTHING)
+    session_id = models.ForeignKey('Session', models.DO_NOTHING, to_field='sessionid')
+
+    class Meta:
+        managed = True
+        db_table = 'guest_cart_items'
+
+class Session(models.Model):
+    id = models.BigAutoField(primary_key=True)
+    sessionid = models.CharField(db_column='sessionID', unique=True, max_length=64)  # Field name made lowercase.
+    expire_timestamp = models.DateTimeField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(User, models.DO_NOTHING, blank=True, null=True)
+    access_token = models.CharField(max_length=512, blank=True, null=True)
+    refresh_token = models.CharField(max_length=512, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'session'
+
+    def save(self, *args, **kwargs):
+        if not self.sessionid:
+            self.sessionid = secrets.token_hex(32)
+        super(Session, self).save(*args, **kwargs)
+
+
 
 class Wishlist(models.Model):
     product_id = models.ForeignKey(Inventory, on_delete=models.DO_NOTHING)

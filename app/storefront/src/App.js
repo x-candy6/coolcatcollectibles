@@ -18,6 +18,8 @@ import Product from "./components/Product/Product"
 
 import Checkout from "./components/checkout/Checkout"
 import Cart from "./components/checkout/Cart"
+import StripeSuccess from "./components/checkout/StripeSuccess"
+import StripeCancel from './components/checkout/StripeCancel'
 
 import Home from './components/Index/Home'
 
@@ -69,6 +71,8 @@ function App() {
 
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
+              <Route path="/checkout/stripe/success" element={<StripeSuccess/>} />
+              <Route path="/checkout/stripe/cancel" element={<StripeCancel/>} />
             </Routes>
           {/* <Footer /> */}
         </div>

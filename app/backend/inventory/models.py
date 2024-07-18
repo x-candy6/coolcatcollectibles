@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -22,14 +23,49 @@ class Inventory(models.Model):
 
     #Change to numeric
     #price = models.CharField(db_column='Price', max_length=50, blank=True, null=True)  # Field name made lowercase.
-    price = models.DecimalField(db_column='Price', max_digits=10, decimal_places=2, blank=True, null=True)
+    price = models.DecimalField(db_column='Price', max_digits=10, decimal_places=2, blank=True, null=True, default=9.99)
 
+    # Stripe Integration
+    stripe_product_id = models.ForeignKey('StripeProduct', on_delete=models.CASCADE, blank=True, null=True)
+    package_height = models.DecimalField(max_digits=5, decimal_places=2, default=9.0 )
+    package_length = models.DecimalField(max_digits=5, decimal_places=2, default=12.0)
+    package_width = models.DecimalField(max_digits=5, decimal_places=2, default=1.0)
+    package_weight = models.DecimalField(max_digits=5, decimal_places=2, default = 15.0)
 
     # Add the following columns: user, booleans for stores(ebay, tiktok, amazon, etsy)
 
     class Meta:
         managed = True
         db_table = 'inventory'
+
+
+class StripeProduct(models.Model):
+    product_id = models.CharField(primary_key=True, max_length=128)
+    item_id = models.ForeignKey(Inventory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, blank=True, null=True)  # Field name made lowercase.
+    unit_amount = models.DecimalField(max_digits=10, decimal_places=2)  # Assuming price is stored as DecimalField in Inventory
+    currency = models.CharField(max_length=16, default='usd')
+    
+    description = models.TextField(blank=True, null=True)  
+    item_object = models.CharField(max_length=64, default="product", blank=True, null=True)
+    is_active = models.BooleanField(default=False)
+    shippable = models.BooleanField(null=True)
+    tax_code = models.IntegerField(default=99999999, blank=True)
+
+    created_at = models.IntegerField(blank=True)
+    updated_at = models.IntegerField(blank=True)
+    images = models.CharField(max_length=255)  # Assuming picurl is stored as CharField in Inventory
+    url = models.CharField(max_length=128, blank=True, null=True)
+
+    class Meta:
+        managed = True
+        db_table = 'stripe_product'
+
+    # def save(self, *args, **kwargs):
+    #     if isinstance(self.created_at, int):  # Check if created_at is a Unix timestamp
+    #         self.created_at = datetime.datetime.fromtimestamp(self.created_at)
+    #         self.updated_at = datetime.datetime.fromtimestamp(self.created_at)
+    #     super().save(*args, **kwargs)
 
 # Table for viewing all literature actors associated with a single piece(connected to inventory)
 class Characters(models.Model):
