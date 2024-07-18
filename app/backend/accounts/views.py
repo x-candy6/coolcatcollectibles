@@ -45,7 +45,7 @@ def validate_session_token(request):
     access_token = request.headers.get('session-access-token')
     print(access_token)
     # No Token Found
-    if not access_token:
+    if access_token == "undefined":
         print('No access token found in headers...')
         return JsonResponse({'error': 'No token found.'}, status=404)
     try:
@@ -68,9 +68,29 @@ def validate_session_token(request):
 def refresh_session_token(request):
     refresh_token = request.headers.get('session-refresh-token')
     session_id = request.headers.get('session-id')
+    print("session_id:", session_id)
+    if session_id:
+        update_session = models.Session.objects.get(sessionid = session_id)
+        try:
+            refresh = RefreshToken(refresh_token)
+        except:
+            refresh = RefreshToken()
+        access_token = str(refresh.access_token)
+        refresh_token = str(refresh)
+        update_session.access_token = access_token
+        update_session.refresh_token = refresh_token
+        update_session.save()
+        print("refresh_session_token, session_id:", session_id)
 
-    if not refresh_token:
+        return JsonResponse({
+            'session_id': session_id,
+            "access_token": access_token,
+            "refresh_token": refresh_token
+        }, status=200)
+
+    if refresh_token == "undefined":
         return JsonResponse({'error': 'No refresh token found.'}, status=404)
+
     refresh = RefreshToken(refresh_token)
     access_token = str(refresh.access_token)
     refresh_token = str(refresh)

@@ -62,7 +62,7 @@ function Page({ children }) {
             } catch (error) {
                 console.log("Error fetching session tokens", error)
 
-                if (error.status === 404 ) { // No or invalid session token -> issue_guest_token
+                if (error.response.status === 404 ) { // No or invalid session token -> issue_guest_token
                     console.log("5")
                     const response = await API.getData(`/user/api/session/issue_token/`);
 
@@ -71,8 +71,9 @@ function Page({ children }) {
                     localStorage.setItem('session-refresh-token', response['refresh_token']);
 
                     console.log(`No or Invalid session token\nNew access_token: ${response['access_token']}\nNew Refresh token: ${response['refresh_token']}\nSession-id:${response['session_id']}`);
-                } else if (error.status === 401 || error.status === 400){
+                } else if (error.response.status === 401 || error.response.status === 400){
                     console.log("3")
+                    console.log(error.response)
                     const response = await API.getReqWithHeaders(`/user/api/session/refresh_token/`, headers);
                     localStorage.setItem('session-id', response['session_id']);
                     localStorage.setItem('session-access-token', response['access_token']);
@@ -81,6 +82,16 @@ function Page({ children }) {
                     console.log(`Expired session token\nNew access_token: ${response.access_token}\nNew Refresh token: ${response.refresh_token}`);
                     console.log("4")
 
+                } else {
+
+                    console.log("8")
+                    const response = await API.getData(`/user/api/session/issue_token/`);
+
+                    localStorage.setItem('session-id', response['session_id']);
+                    localStorage.setItem('session-access-token', response['access_token']);
+                    localStorage.setItem('session-refresh-token', response['refresh_token']);
+
+                    console.log(`No or Invalid session token\nNew access_token: ${response['access_token']}\nNew Refresh token: ${response['refresh_token']}\nSession-id:${response['session_id']}`);
                 }
             }
         };

@@ -18,19 +18,46 @@ from rest_framework_simplejwt.authentication import JWTAuthentication
 
 import json
 from . import models
+from inventory import models
 import stripe
 
+def get_price_id(product_id):
+    prices = stripe.Price.list(product=product_id)
+    
+    price_ids = [price.id for price in prices.data]
+    price_ids = price_ids[0]
+    
+    return price_ids
+    
 @csrf_exempt
 def stripe_checkout(request):
     try:
+
         if request.method == 'POST':
             data = json.loads(request.body)
-            line_items = data.get('line_items')
+            req_cart_items = data.get('line_items')
+            cart_items = []
+
+            for item in req_cart_items:
+                product = models.Inventory.objects.filter(item_id=item['id'])[0]
+                stripe_product = models.StripeProduct.objects.filter(item_id=product.item_id)[0]
+                print(stripe_product.product_id)
+                price_id = get_price_id(stripe_product.product_id)
+                cart_items.append({
+                    'price': price_id,
+                    "quantity": item['quantity']
+                })
+
+            for item in cart_items:
+                print("item: ", item)
+
+            success_url= settings.DOMAIN_NAME + '/checkout/stripe/success',
+            print(success_url)
             checkout_session = stripe.checkout.Session.create(
-                line_items = line_items,
+                line_items = cart_items,
                 mode='payment',
-                success_url= settings.DOMAIN_NAME + '/checkout/stripe/success',
-                cancel_url= settings.DOMAIN_NAME + '/checkout/stripe/cancel',
+                success_url= "http://" + settings.DOMAIN_NAME + '/checkout/stripe/success',
+                cancel_url= "http://" + settings.DOMAIN_NAME + '/checkout/stripe/cancel',
                 automatic_tax={'enabled': True}
             )
 

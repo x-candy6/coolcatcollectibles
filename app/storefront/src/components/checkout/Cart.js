@@ -56,23 +56,27 @@ function Cart() {
         return cartItems.reduce((total, item) => total + item.price * item.quantity, 0).toFixed(2);
     };
 
-    const PayWithStripeButton = () => {
-        const handleClick = async () => {
-            // Fetch the Checkout session from your backend
-            const formData = {
-                line_items: cartItems
+    const PayWithStripeButton = async () => {
+        // Fetch the Checkout session from your backend
+        const formData = {
+            line_items: cartItems
+        }
+        try{ 
+            const response = await API.postData('/orders/api/payments/stripe_checkout/', formData);
+
+        } catch (error) {
+            console.log(error.response.data.checkout_session_url)
+
+            if (error.response.status === 303){
+                 window.location.href = error.response.data.checkout_session_url
+            } else{
+                console.log(error.response.status)
+                console.log("PayWithStripeButton Error:", error)
+
             }
-            try{ 
-                const response = await API.postData('/orders/api/payments/stripe_checkout/', formData);
-                return redirect(response.checkout_session_url)
+        }
 
-            } catch (error) {
-                console.log("PayWithStripeButton Error")
-            }
-
-
-
-        };
+    };
 
 
     return (
@@ -109,13 +113,14 @@ function Cart() {
                 <p className="text-xl font-semibold">${calculateTotal()}</p>
             </div>
 
-            {/* Checkout button */}
+            {/* Stripe Checkout button */}
             <div className="border-solid border-2 border-indigo-600 mt-8 flex justify-end">
-                <a href="/checkout">
-                    <button className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md">
-                        Proceed to Checkout
-                    </button>
-                </a>
+                <button 
+                    className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow-md"
+                    onClick={PayWithStripeButton}
+                >
+                    Pay with Stripe
+                </button>
             </div>
         </div>
         </Card>
